@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}
+    Posting
+{% endblock %}
+
+{% block content %}
+    <div class="container timeline-container">
+        <div class="row">
+            <!-- 왼쪽 컬럼 -->
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body" style="text-align: center">
+                        <h5 class="card-title">{{ user.username }}</h5>
+                    </div>
+                </div>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active" style="text-align: center;">
+                        <a class="nav-link" href="/"> home <span class="sr-only"></span></a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active" style="text-align: center;">
+                        <a class="nav-link" href="/board/{{ '자유게시판' }}"> 자유게시판 <span class="sr-only"></span></a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active" style="text-align: center;">
+                        <a class="nav-link" href="/board/{{ '익명게시판' }}"> 익명게시판 <span class="sr-only"></span></a>
+                    </li>
+                </ul>
+            </div>
+            <!-- 오른 쪽 컬럼-->
+            <div class="col-md-7">
+                <!-- 글을 작성 하는 곳 -->
+                <div class="row mb-2">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h5 class="mt-0"> -게시글 작성- </h5>
+                                        <p>
+                                        <form action="/board/" method="post">
+                                            {% csrf_token %}
+                                            category :
+                                            {{ product_form.category }} <br>
+                                            title :
+                                            {{ product_form.title }}
+                                            content :
+                                            {{ product_form.content }}
+                                            <button type="submit" class="btn btn-primary"
+                                                    style="float:right; margin-top: 30px;">등록하기
+                                            </button>
+                                        </form>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+{% endblock %}

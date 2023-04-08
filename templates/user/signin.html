@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    로그인
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="wrap">
+            <h2 class="title-center"> 로그인</h2>
+            <form class="form-area" action="/sign-in/" method="post">
+                {% csrf_token %}
+                아이디 :
+                {{ login_form.username }}
+                비밀번호 :
+                {{ login_form.password }}
+                <hr>
+                <div style="float: right">
+                    <button type="submit" class="btn btn-primary">로그인</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}
