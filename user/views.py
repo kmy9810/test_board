@@ -25,7 +25,7 @@ def sign_up_view(request):
         if user:
             return redirect('/')
         else:
-            user_form = UserForm
+            user_form = UserForm()
             return render(request, 'user/signup.html', {'user_form': user_form})
     elif request.method == 'POST':
         username = request.POST.get('username', None)

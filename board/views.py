@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import ProductForm
 from comment.forms import CommentForm
 from .models import ProductModel
+from heart.models import HeartModel
 from comment.models import CommentModel
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
@@ -56,4 +57,12 @@ def save_content(request):
 
 
 def heart(request, id):
+    user = request.user
+    # if not HeartModel.objects.get(author_id=user):
+    #     delete_heart = HeartModel.objects.get(author_id=user.id)
+    #     delete_heart.delete()
+    # else:
+    my_heart = HeartModel()
+    my_heart.author = request.user
+    my_heart.product = ProductModel.objects.get(id=id)
     return redirect(f'/posting/{id}')
