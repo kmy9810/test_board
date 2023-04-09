@@ -19,7 +19,8 @@ class ProductModel(models.Model):
     heart = models.IntegerField(null=False)
     views_content = models.IntegerField(null=False)
 
-    def __str__(self):
-        return self.created
+
+def __str__(self):
+    return self.created
 
 

@@ -9,8 +9,9 @@
             <!-- 왼쪽 컬럼 -->
             <div class="col-md-3">
                 <div class="card">
-                    <div class="card-body" style="text-align: center">
+                    <div class="card-body" style="text-align: center;">
                         <h5 class="card-title">{{ user.username }}</h5>
+                        <a href="/profile/{{ user.id }}" style="text-decoration: none">정보 수정</a>
                     </div>
                 </div>
                 <ul class="navbar-nav mr-auto">

@@ -44,15 +44,44 @@
                                     {{ content.category }}
                                     {{ content.created }}
                                     {{ content.heart }}
-                                    {{ content.content }}글
+                                    {{ content.content }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media">
+                                    <form action="/comment/{{ content.id }}" method="post">
+                                        {% csrf_token %}
+                                        {{ comment_form }}
+                                        <button type="submit" class="btn btn-primary"
+                                                style="float:right; margin-top: 30px;">댓글달기
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media">
+                                    {% for cm in comment %}
+                                        <div>
+                                            {{ cm.comment }} ({{ cm.author.username }})
+                                            {% if user == cm.author %}
+                                                <div style="text-align: right">
+                                                    <a href="/comment-delete/{{ cm.id }}" style="text-decoration: none;">
+                                                        댓글삭제</a>
+                                                </div>
+                                                <hr>
+                                            {% endif %}
+                                        </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <hr>
+                <div class="col-md-2"></div>
             </div>
-            <div class="col-md-2"></div>
         </div>
-    </div>
 {% endblock %}

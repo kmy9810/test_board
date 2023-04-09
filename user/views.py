@@ -6,6 +6,11 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 
 
+def profile(request, id):
+    user_profile = UserModel.objects.get(id=id)
+    return render(request, 'user/profile.html', {'profile': user_profile})
+
+
 def sign_up_view(request):
     if request.method == 'GET':
         user = request.user.is_authenticated
