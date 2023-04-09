@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import UserModel
+from comment.models import CommentModel, ProductModel
 from .forms import UserForm
 from django.contrib.auth import get_user_model  # 사용자가 데이터베이스 안에 있는지 검사하는 함수
 from django.contrib import auth
@@ -8,8 +9,15 @@ from django.contrib.auth.decorators import login_required
 
 def profile(request, id):
     user_profile = UserModel.objects.get(id=id)
-    return render(request, 'user/profile.html', {'profile': user_profile})
-
+    user_comment = CommentModel.objects.filter(author_id=id)
+    user_posting = ProductModel.objects.filter(author_id=id)
+    return render(request, 'user/profile.html', {'profile': user_profile,
+                                                 'comment': user_comment,
+                                                 'posting': user_posting,
+                                                 'total': {
+                                                     'all_posting': len(user_posting),
+                                                     'all_comment': len(user_comment)
+                                                 }})
 
 def sign_up_view(request):
     if request.method == 'GET':

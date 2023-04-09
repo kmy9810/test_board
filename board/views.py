@@ -12,18 +12,10 @@ from django.contrib.auth import get_user_model  # 사용자가 데이터베이�
 def home(request):
     user = request.user.is_authenticated
     if user:
-        return redirect('/board')
+        all_content = ProductModel.objects.all()[:10]
+        return render(request, 'board/home.html', {'content': all_content})
     else:
         return redirect('/sign-in')
-
-
-def board(request):
-    if request.method == 'GET':
-        user = request.user.is_authenticated
-        if user:
-            product_form = ProductForm()
-            all_content = ProductModel.objects.all()[:10]
-            return render(request, 'board/home.html', {'product_form': product_form, 'content': all_content})
 
 
 def content_list(request, id):
@@ -60,4 +52,8 @@ def save_content(request):
             my_content.heart = 0
             my_content.created = datetime.now()
             my_content.save()
-            return redirect('/board')
+            return redirect(f'/posting/{my_content.id}')
+
+
+def heart(request, id):
+    return redirect(f'/posting/{id}')

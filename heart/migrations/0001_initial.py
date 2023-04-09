@@ -12,15 +12,12 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='CommentModel',
+            name='HeartModel',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('comment', models.CharField(default='', max_length=256)),
-                ('created', models.DateTimeField(auto_now_add=True, verbose_name='Date Created')),
-                ('heart', models.IntegerField()),
             ],
             options={
-                'db_table': 'comment',
+                'db_table': 'heart',
             },
         ),
     ]

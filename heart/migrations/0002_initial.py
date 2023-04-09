@@ -11,13 +11,19 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('board', '0001_initial'),
+        ('heart', '0001_initial'),
+        ('board', '0002_initial'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='productmodel',
+            model_name='heartmodel',
             name='author',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+        ),
+        migrations.AddField(
+            model_name='heartmodel',
+            name='product',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='board.productmodel'),
         ),
     ]

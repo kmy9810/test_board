@@ -1,21 +1,120 @@
 {% extends 'base.html' %}
-
 {% block title %}
-    회원가입
+    Posting
 {% endblock %}
-{% block content %}
-    <div class="container">
-        <div class="wrap">
-            <h2 class="title-center"> 정보 수정 </h2>
-            <form class="form-area" method="post" action="/sign-up/">
-                {% csrf_token %}
-                {{ profile.username }}
-                <hr>
-                <div style="float: right">
-                    <button type="submit" class="btn btn-primary">수정하기</button>
-                </div>
-            </form>
 
+{% block content %}
+    <div class="container timeline-container">
+        <div class="row">
+            <!-- 왼쪽 컬럼 -->
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body" style="text-align: center">
+                        <h5 class="card-title">{{ user.username }}</h5>
+                    </div>
+                </div>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active" style="text-align: center;">
+                        <a class="nav-link" href="/"> home <span class="sr-only"></span></a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active" style="text-align: center;">
+                        <a class="nav-link" href="/board/{{ '자유게시판' }}"> 자유게시판 <span class="sr-only"></span></a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active" style="text-align: center;">
+                        <a class="nav-link" href="/board/{{ '익명게시판' }}"> 익명게시판 <span class="sr-only"></span></a>
+                    </li>
+                </ul>
+            </div>
+            <!-- 오른 쪽 컬럼-->
+            <div class="col-md-7">
+                <!-- 글을 작성 하는 곳 -->
+                <div class="row mb-2">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h5 class="mt-0" style="text-align: center"> -Profile- </h5>
+                                        <p>
+                                            아이디 : {{ profile.username }} <br>
+                                            가입 : {{ profile.date_joined }} <br>
+                                            posting : {{ total.all_posting }} <br>
+                                            comment : {{ total.all_comment }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" style="margin-top: 30px">
+                            <div class="card-body">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h5 class="mt-0" style="text-align: center"> My-Posting </h5>
+                                        <table id="table" class="table" style="text-align: center; width: 100%">
+                                            <thead>
+                                            <tr>
+                                                <th>category</th>
+                                                <th>title</th>
+                                                <th>heart</th>
+                                                <th>views</th>
+                                                <th>created</th>
+                                            </tr>
+                                            {% for po in posting %}
+                                                <tr>
+                                                    <th>{{ po.category }}</th>
+                                                    <th><a href="/posting/{{ po.id }}" style="text-decoration: none;">
+                                                        {{ po.title }}</a></th>
+                                                    <th>{{ po.heart }}</th>
+                                                    <th>{{ po.views_content }}</th>
+                                                    <th>{{ po.created }}</th>
+                                                </tr>
+                                            {% endfor %}
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" style="margin-top: 30px">
+                            <div class="card-body">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h5 class="mt-0" style="text-align: center"> My-Comment </h5>
+                                        <table id="table" class="table" style="text-align: center; width: 100%">
+                                            <thead>
+                                            <tr>
+                                                <th>category</th>
+                                                <th>title</th>
+                                                <th>comment</th>
+                                                <th>created</th>
+                                            </tr>
+                                            {% for co in comment %}
+                                                <tr>
+                                                    <th>{{ co.product.category }}</th>
+                                                    <th><a href="/posting/{{ co.product.id }}"
+                                                           style="text-decoration: none;">
+                                                        {{ co.product.title }}</a></th>
+                                                    <th>{{ co.comment }}</th>
+                                                    <th>{{ co.created }}</th>
+                                                </tr>
+                                            {% endfor %}
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div class="col-md-2"></div>
         </div>
     </div>
 {% endblock %}
