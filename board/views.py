@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import ProductForm
-from .models import Product
+from .models import ProductModel
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model  # 사용자가 데이터베이스 안에 있는지 검사하는 함수

@@ -1,10 +1,10 @@
 from django.forms import ModelForm, TextInput, Textarea, Select
-from .models import Product
+from .models import ProductModel
 
 
 class ProductForm(ModelForm):
     class Meta:
-        model = Product
+        model = ProductModel
         fields = ['category', 'title', 'content']
         categorys = (
             ('자유게시판', '자유게시판'),

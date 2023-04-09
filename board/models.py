@@ -3,7 +3,7 @@ from django.db import models
 from user.models import UserModel
 
 
-class Product(models.Model):
+class ProductModel(models.Model):
     class Meta:
         db_table = "product"
 
@@ -19,8 +19,7 @@ class Product(models.Model):
     heart = models.IntegerField(null=False)
     views_content = models.IntegerField(null=False)
 
-
-def __str__(self):
-    return self.created
+    def __str__(self):
+        return self.created
 
 
