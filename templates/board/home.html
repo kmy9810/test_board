@@ -41,10 +41,10 @@
                                     <div class="media-body">
                                         <h5 class="mt-0"> -최근 게시글- </h5>
                                         <p>
-                                        <button  type="button" class="btn btn-primary"
-                                                 onclick="location.href='/posting'"
-                                                style="float:right; margin-top: 30px;">글작성
-                                        </button>
+                                            <button type="button" class="btn btn-primary"
+                                                    onclick="location.href='/posting'"
+                                                    style="float:right; margin-top: 30px;">글작성
+                                            </button>
                                         </p>
                                     </div>
                                     <table id="table" class="table" style="text-align: center; width: 100%">
@@ -54,7 +54,7 @@
                                             <th>제목</th>
                                             <th>글쓴이</th>
                                         </tr>
-                                        {% for cn in content %}
+                                        {% for cn in page_obj %}
                                             <tr>
                                                 <th>{{ cn.category }}</th>
                                                 <th><a href="/posting/{{ cn.id }}">{{ cn.title }}</a></th>
@@ -67,6 +67,29 @@
                                         {% endfor %}
                                         </thead>
                                     </table>
+                                    {% if page_obj.has_other_pages %}
+                                        <div style="text-align: center">
+                                            <li style="margin: 3px; list-style: none;">
+                                                {% if page_obj.has_previous %}
+                                                    <a href="?page={{ page_obj.previous_page_number }}"
+                                                       style="text-decoration: none;color: blue;">&#10094; 이전</a>
+                                                {% endif %}
+                                                {% for page in custom_range %}
+                                                    {% if page == page_obj.number %}
+                                                        <a href="?page={{ page }}"
+                                                           style="text-decoration: none;color: red;">{{ page }}</a>
+                                                    {% else %}
+                                                        <a href="?page={{ page }}"
+                                                           style="text-decoration: none;color: blue;">{{ page }}</a>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                {% if page_obj.has_next %}
+                                                    <a href="?page={{ page_obj.next_page_number }}"
+                                                       style="text-decoration: none;color: blue;">&#10095; 다음</a>
+                                                {% endif %}
+                                            </li>
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

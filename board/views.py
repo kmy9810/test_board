@@ -5,6 +5,7 @@ from .models import ProductModel
 from heart.models import HeartModel
 from comment.models import CommentModel
 from datetime import datetime
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model  # 사용자가 데이터베이스 안에 있는지 검사하는 함수
 # Create your views here.
@@ -13,8 +14,31 @@ from django.contrib.auth import get_user_model  # 사용자가 데이터베이�
 def home(request):
     user = request.user.is_authenticated
     if user:
-        all_content = ProductModel.objects.all()[:10]
-        return render(request, 'board/home.html', {'content': all_content})
+        all_content = ProductModel.objects.all().order_by('-created')
+        page = request.GET.get('page')
+
+        paginator = Paginator(all_content, 1)
+        try:
+            page_obj = paginator.page(page)
+        except PageNotAnInteger:  # page 숫자가 없을 시
+            page = 1
+            page_obj = paginator.page(page)
+        except EmptyPage:   # page 숫자가 너무 클 시 마지막 페이지를 보여줌
+            page = paginator.num_pages
+            page_obj = paginator.page(page)
+
+        # 앞으로 2개 뒤로 2개 총 5개가 기본적으로 보이는 pagination
+        left_index = (int(page) - 2)
+        if left_index < 1:
+            left_index = 1
+
+        right_index = (int(page) + 2)
+        if right_index > paginator.num_pages:
+            right_index = paginator.num_pages
+
+        custom_range = range(left_index, right_index+1)
+        return render(request, 'board/home.html', {'content': all_content, 'page_obj': page_obj,
+                                                   'paginator': paginator, 'custom_range': custom_range})
     else:
         return redirect('/sign-in')
 

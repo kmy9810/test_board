@@ -5,7 +5,7 @@ from .models import ProductModel
 class ProductForm(ModelForm):
     class Meta:
         model = ProductModel
-        fields = ['category', 'title', 'content']
+        fields = ['category', 'title', 'content']  # 모델에 없는 필드 사용시 오류.
         categorys = (
             ('자유게시판', '자유게시판'),
             ('익명게시판', '익명게시판'),
