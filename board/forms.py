@@ -5,21 +5,10 @@ from .models import ProductModel
 class ProductForm(ModelForm):
     class Meta:
         model = ProductModel
-        fields = ['category', 'title', 'content']  # 모델에 없는 필드 사용시 오류.
-        categorys = (
-            ('자유게시판', '자유게시판'),
-            ('익명게시판', '익명게시판'),
-        )
-        widgets = {
-            'category': Select(choices=categorys),
-            'title': TextInput(attrs={
-                'class': "form-control",
-                'style': 'resize: none; height: 50px;',
-                'placeholder': 'Title'
-            }),
-            'content': Textarea(attrs={
-                "class": "form-control",
-                'style': 'resize: none; height: 100px;',
-                'placeholder': 'content'
-            }),
+        fields = ['category', 'title', 'imgfile', 'content']  # 모델에 없는 필드 사용시 오류.
+        labels = {
+            'category': '카테고리',
+            'title': '제목',
+            'imgfile': '이미지',
+            'content': '내용'
         }

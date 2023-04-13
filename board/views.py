@@ -68,6 +68,7 @@ def save_content(request):
         if form.is_valid():
             user = request.user
             product_form = request.POST
+            product_img = request.FILES
             my_content = ProductModel()
             my_content.author = user
             my_content.category = product_form['category']
@@ -76,6 +77,7 @@ def save_content(request):
             my_content.views_content = 0
             my_content.heart = 0
             my_content.created = datetime.now()
+            my_content.imgfile = product_img['imgfile']
             my_content.save()
             return redirect(f'/posting/{my_content.id}')
 

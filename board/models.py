@@ -18,6 +18,7 @@ class ProductModel(models.Model):
     created = models.DateTimeField(verbose_name="Date Created", auto_now_add=True)
     heart = models.IntegerField(null=False)
     views_content = models.IntegerField(null=False)
+    imgfile = models.ImageField(null=True, upload_to="", blank=True)  # 이미지 컬럼 추가
 
 
 def __str__(self):

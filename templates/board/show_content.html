@@ -42,12 +42,18 @@
                                     {{ content.title }} <br>
                                     작성자 :
                                     {{ content.author }} <br>
-                                    {{ content.category }}
-                                    {{ content.created }}
-                                    {{ content.heart }}
-                                    {{ content.content }}
+                                    {{ content.category }}<br>
+                                    {{ content.created }}<br>
+                                    {{ content.heart }}<br>
+                                    {{ content.content }}<br>
+                                    {% if content.imgfile %}
+                                        <div style="width:100px; height:100px; float:left; margin-right:10px;">
+                                            <img src="{{ content.imgfile.url }}" width="100px">
+                                        </div>
+                                    {% endif %}
                                 </div>
-                                <button type="button" onclick="location.href='/heart/{{ content.id }}'" class="btn btn-primary"
+                                <button type="button" onclick="location.href='/heart/{{ content.id }}'"
+                                        class="btn btn-primary"
                                         style="float:right; margin-top: 30px;">공감
                                 </button>
                             </div>

@@ -41,12 +41,14 @@
                                     <div class="media-body">
                                         <h5 class="mt-0"> -게시글 작성- </h5>
                                         <p>
-                                        <form action="/board/" method="post">
+                                        <form action="/board/" method="post" enctype="multipart/form-data">
                                             {% csrf_token %}
                                             category :
                                             {{ product_form.category }} <br>
                                             title :
                                             {{ product_form.title }}
+                                            <label for="imgfile">이미지 : </label>
+                                            <input type="file" class="form-control" name="imgfile" id="imgfile">
                                             content :
                                             {{ product_form.content }}
                                             <button type="submit" class="btn btn-primary"
